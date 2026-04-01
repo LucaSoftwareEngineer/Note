@@ -11,8 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -29,12 +27,12 @@ public class Note implements Serializable{
 	private String content;
 	
 	@Column(nullable = false, updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	private Date createdAt;
 	
-	
-	
+	public Note() {
+
+	}
 
 	public Note(Long id, @NotBlank String title, @NotBlank String content, Date createdAt) {
 		super();
@@ -76,9 +74,6 @@ public class Note implements Serializable{
 		this.createdAt = createdAt;
 	}
 
-	
-	
-	
 }
 
 
