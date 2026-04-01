@@ -1,8 +1,6 @@
 package com.example.easynotes.controllers;
 
-import com.example.easynotes.dto.AggiungiNotaRequest;
-import com.example.easynotes.dto.AggiungiNotaResponse;
-import com.example.easynotes.dto.NotaResponse;
+import com.example.easynotes.dto.*;
 import com.example.easynotes.services.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +27,15 @@ public class NotaController {
     public ResponseEntity<List<NotaResponse>> elencoNote() {
         try {
             return ResponseEntity.ok(noteService.elencoNote());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PutMapping("api/note/modifica")
+    public ResponseEntity<ModificaNotaResponse> modificaNota(@RequestBody ModificaNotaRequest request) {
+        try {
+            return ResponseEntity.ok(noteService.modificaNota(request));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

@@ -1,8 +1,7 @@
 package com.example.easynotes.services;
 
-import com.example.easynotes.dto.AggiungiNotaRequest;
-import com.example.easynotes.dto.AggiungiNotaResponse;
-import com.example.easynotes.dto.NotaResponse;
+import com.example.easynotes.dto.*;
+import com.example.easynotes.exceptions.NotaNotFound;
 import com.example.easynotes.model.Note;
 import com.example.easynotes.repositories.NoteRepository;
 import org.modelmapper.ModelMapper;
@@ -45,6 +44,22 @@ public class NoteService {
         }
 
         return noteResponse;
+    }
+
+    public ModificaNotaResponse modificaNota(ModificaNotaRequest request) throws NotaNotFound {
+
+        Note nota = noteRepository.findById(request.getId()).get();
+        if (nota == null) {
+            throw  new NotaNotFound();
+        }
+
+        nota.setTitle(request.getTitle());
+        nota.setContent(request.getContent());
+        nota.setCreatedAt(request.getCreatedAt());
+
+        noteRepository.save(nota);
+
+        return modelMapper.map(nota, ModificaNotaResponse.class);
     }
 
 }
