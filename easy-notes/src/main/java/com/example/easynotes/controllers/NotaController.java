@@ -41,4 +41,14 @@ public class NotaController {
         }
     }
 
+    @DeleteMapping("api/note/elimina/{id}")
+    public ResponseEntity<EliminaNotaResponse> eliminaNota (@PathVariable("id") Long id) {
+        EliminaNotaResponse response = noteService.eliminaNota(id);
+        if (response.isEliminata()) {
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
 }

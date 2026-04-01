@@ -62,4 +62,15 @@ public class NoteService {
         return modelMapper.map(nota, ModificaNotaResponse.class);
     }
 
+    public EliminaNotaResponse eliminaNota(Long id) {
+        EliminaNotaResponse response = new EliminaNotaResponse();
+        try {
+            noteRepository.deleteById(id);
+            response.setEliminata(true);
+        } catch (Exception e) {
+            response.setEliminata(false);
+        }
+        return response;
+    }
+
 }
