@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -30,6 +32,19 @@ public class NoteService {
         Note nota = modelMapper.map(request, Note.class);
         nota = noteRepository.save(nota);
         return modelMapper.map(nota, AggiungiNotaResponse.class);
+    }
+
+    public List<NotaResponse> elencoNote() {
+        List<Note> note = noteRepository.findAll();
+        Iterator iterator = note.listIterator();
+
+        List<NotaResponse> noteResponse = new ArrayList<>();
+        while (iterator.hasNext()) {
+            NotaResponse notaResponse = modelMapper.map(iterator.next(), NotaResponse.class);
+            noteResponse.add(notaResponse);
+        }
+
+        return noteResponse;
     }
 
 }
