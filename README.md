@@ -1,4 +1,4 @@
-# 📝 Note Manager API (Spring Boot)
+# 📝 EASY NOTES API (Spring Boot)
 
 Questo progetto è un'applicazione backend per la gestione di note digitali, basata sul lavoro originale di **[Gixx17](https://github.com/Gixx17)**. 
 
